@@ -1,0 +1,6 @@
+../Core/Src/tasks.c:11:6:VoiceProcessing	16	static
+../Core/Src/tasks.c:15:6:KeypadScanning	32	static
+../Core/Src/tasks.c:110:6:ScreenManager	32	static
+../Core/Src/tasks.c:162:6:sdHandler	40	static
+../Core/Src/tasks.c:197:6:LockControl	24	static
+../Core/Src/tasks.c:210:6:IdleTask	16	static

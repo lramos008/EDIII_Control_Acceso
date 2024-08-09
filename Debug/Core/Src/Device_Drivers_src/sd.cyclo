@@ -1,0 +1,5 @@
+../Core/Src/Device_Drivers_src/sd.c:10:11:verifyAccessRegister	4
+../Core/Src/Device_Drivers_src/sd.c:39:11:verifyDatabase	5
+../Core/Src/Device_Drivers_src/sd.c:68:7:searchUserOnDatabase	5
+../Core/Src/Device_Drivers_src/sd.c:101:7:getTimeFromRTC	1
+../Core/Src/Device_Drivers_src/sd.c:119:6:recordOnRegister	1

@@ -1,0 +1,2 @@
+../Core/Src/Device_Drivers_src/lock.c:3:6:openLock	1
+../Core/Src/Device_Drivers_src/lock.c:9:6:closeLock	1
