@@ -6,7 +6,7 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Core/Src/Device_Drivers_src/File_Handling_RTOS.c \
-../Core/Src/Device_Drivers_src/adc.c \
+../Core/Src/Device_Drivers_src/adc_functions.c \
 ../Core/Src/Device_Drivers_src/fatfs_sd.c \
 ../Core/Src/Device_Drivers_src/keypad.c \
 ../Core/Src/Device_Drivers_src/lock.c \
@@ -18,7 +18,7 @@ C_SRCS += \
 
 OBJS += \
 ./Core/Src/Device_Drivers_src/File_Handling_RTOS.o \
-./Core/Src/Device_Drivers_src/adc.o \
+./Core/Src/Device_Drivers_src/adc_functions.o \
 ./Core/Src/Device_Drivers_src/fatfs_sd.o \
 ./Core/Src/Device_Drivers_src/keypad.o \
 ./Core/Src/Device_Drivers_src/lock.o \
@@ -30,7 +30,7 @@ OBJS += \
 
 C_DEPS += \
 ./Core/Src/Device_Drivers_src/File_Handling_RTOS.d \
-./Core/Src/Device_Drivers_src/adc.d \
+./Core/Src/Device_Drivers_src/adc_functions.d \
 ./Core/Src/Device_Drivers_src/fatfs_sd.d \
 ./Core/Src/Device_Drivers_src/keypad.d \
 ./Core/Src/Device_Drivers_src/lock.d \
@@ -48,7 +48,7 @@ Core/Src/Device_Drivers_src/%.o Core/Src/Device_Drivers_src/%.su Core/Src/Device
 clean: clean-Core-2f-Src-2f-Device_Drivers_src
 
 clean-Core-2f-Src-2f-Device_Drivers_src:
-	-$(RM) ./Core/Src/Device_Drivers_src/File_Handling_RTOS.cyclo ./Core/Src/Device_Drivers_src/File_Handling_RTOS.d ./Core/Src/Device_Drivers_src/File_Handling_RTOS.o ./Core/Src/Device_Drivers_src/File_Handling_RTOS.su ./Core/Src/Device_Drivers_src/adc.cyclo ./Core/Src/Device_Drivers_src/adc.d ./Core/Src/Device_Drivers_src/adc.o ./Core/Src/Device_Drivers_src/adc.su ./Core/Src/Device_Drivers_src/fatfs_sd.cyclo ./Core/Src/Device_Drivers_src/fatfs_sd.d ./Core/Src/Device_Drivers_src/fatfs_sd.o ./Core/Src/Device_Drivers_src/fatfs_sd.su ./Core/Src/Device_Drivers_src/keypad.cyclo ./Core/Src/Device_Drivers_src/keypad.d ./Core/Src/Device_Drivers_src/keypad.o ./Core/Src/Device_Drivers_src/keypad.su ./Core/Src/Device_Drivers_src/lock.cyclo ./Core/Src/Device_Drivers_src/lock.d ./Core/Src/Device_Drivers_src/lock.o ./Core/Src/Device_Drivers_src/lock.su ./Core/Src/Device_Drivers_src/screen.cyclo ./Core/Src/Device_Drivers_src/screen.d ./Core/Src/Device_Drivers_src/screen.o ./Core/Src/Device_Drivers_src/screen.su ./Core/Src/Device_Drivers_src/sd.cyclo ./Core/Src/Device_Drivers_src/sd.d ./Core/Src/Device_Drivers_src/sd.o ./Core/Src/Device_Drivers_src/sd.su ./Core/Src/Device_Drivers_src/ssd1306.cyclo ./Core/Src/Device_Drivers_src/ssd1306.d ./Core/Src/Device_Drivers_src/ssd1306.o ./Core/Src/Device_Drivers_src/ssd1306.su ./Core/Src/Device_Drivers_src/ssd1306_fonts.cyclo ./Core/Src/Device_Drivers_src/ssd1306_fonts.d ./Core/Src/Device_Drivers_src/ssd1306_fonts.o ./Core/Src/Device_Drivers_src/ssd1306_fonts.su ./Core/Src/Device_Drivers_src/ssd1306_tests.cyclo ./Core/Src/Device_Drivers_src/ssd1306_tests.d ./Core/Src/Device_Drivers_src/ssd1306_tests.o ./Core/Src/Device_Drivers_src/ssd1306_tests.su
+	-$(RM) ./Core/Src/Device_Drivers_src/File_Handling_RTOS.cyclo ./Core/Src/Device_Drivers_src/File_Handling_RTOS.d ./Core/Src/Device_Drivers_src/File_Handling_RTOS.o ./Core/Src/Device_Drivers_src/File_Handling_RTOS.su ./Core/Src/Device_Drivers_src/adc_functions.cyclo ./Core/Src/Device_Drivers_src/adc_functions.d ./Core/Src/Device_Drivers_src/adc_functions.o ./Core/Src/Device_Drivers_src/adc_functions.su ./Core/Src/Device_Drivers_src/fatfs_sd.cyclo ./Core/Src/Device_Drivers_src/fatfs_sd.d ./Core/Src/Device_Drivers_src/fatfs_sd.o ./Core/Src/Device_Drivers_src/fatfs_sd.su ./Core/Src/Device_Drivers_src/keypad.cyclo ./Core/Src/Device_Drivers_src/keypad.d ./Core/Src/Device_Drivers_src/keypad.o ./Core/Src/Device_Drivers_src/keypad.su ./Core/Src/Device_Drivers_src/lock.cyclo ./Core/Src/Device_Drivers_src/lock.d ./Core/Src/Device_Drivers_src/lock.o ./Core/Src/Device_Drivers_src/lock.su ./Core/Src/Device_Drivers_src/screen.cyclo ./Core/Src/Device_Drivers_src/screen.d ./Core/Src/Device_Drivers_src/screen.o ./Core/Src/Device_Drivers_src/screen.su ./Core/Src/Device_Drivers_src/sd.cyclo ./Core/Src/Device_Drivers_src/sd.d ./Core/Src/Device_Drivers_src/sd.o ./Core/Src/Device_Drivers_src/sd.su ./Core/Src/Device_Drivers_src/ssd1306.cyclo ./Core/Src/Device_Drivers_src/ssd1306.d ./Core/Src/Device_Drivers_src/ssd1306.o ./Core/Src/Device_Drivers_src/ssd1306.su ./Core/Src/Device_Drivers_src/ssd1306_fonts.cyclo ./Core/Src/Device_Drivers_src/ssd1306_fonts.d ./Core/Src/Device_Drivers_src/ssd1306_fonts.o ./Core/Src/Device_Drivers_src/ssd1306_fonts.su ./Core/Src/Device_Drivers_src/ssd1306_tests.cyclo ./Core/Src/Device_Drivers_src/ssd1306_tests.d ./Core/Src/Device_Drivers_src/ssd1306_tests.o ./Core/Src/Device_Drivers_src/ssd1306_tests.su
 
 .PHONY: clean-Core-2f-Src-2f-Device_Drivers_src
 

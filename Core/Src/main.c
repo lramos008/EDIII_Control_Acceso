@@ -20,7 +20,8 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "fatfs.h"
-
+#define ARM_MATH_CM4
+#include "arm_math.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "tasks.h"
@@ -141,11 +142,11 @@ int main(void)
   /* definition and creation of defaultTask */
 
   /* USER CODE BEGIN RTOS_THREADS */
-  xTaskCreate(ScreenManager, "Tarea 05", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 4, NULL);
-  xTaskCreate(LockControl, "Tarea 04", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 3, NULL);
-  //xTaskCreate(VoiceProcessing, "Tarea 03", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 2, NULL);
-  xTaskCreate(sdHandler, "Tarea 02", 8 * configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 2, NULL);
-  xTaskCreate(KeypadScanning, "Tarea 01", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL);
+  //xTaskCreate(ScreenManager, "Tarea 05", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 4, NULL);
+  //xTaskCreate(LockControl, "Tarea 04", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 3, NULL);
+  xTaskCreate(VoiceProcessing, "Tarea 03", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 2, NULL);
+  //xTaskCreate(sdHandler, "Tarea 02", 8 * configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 2, NULL);
+  //xTaskCreate(KeypadScanning, "Tarea 01", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL);
   xTaskCreate(IdleTask, "Tarea Idle", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL);
   /* USER CODE END RTOS_THREADS */
 
@@ -546,6 +547,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 1 */
 
   /* USER CODE END Callback 1 */
+}
+
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
+	HAL_ADC_Stop_DMA(&hadc1);
 }
 
 /**

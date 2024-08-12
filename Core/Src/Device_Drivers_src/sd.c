@@ -1,11 +1,15 @@
-#include "sd.h"
-extern UART_HandleTypeDef huart2;
+/*Agrego includes necesarios*/
+#include "File_Handling_RTOS.h"
+#include "stm32f4xx_hal.h"
+#include <string.h>
+/*Traigo variables importantes*/
 extern FATFS fs;  // file system
 extern FIL fil; // File
 extern FILINFO fno;
 extern FRESULT fresult;  // result
 extern UINT br, bw;  // File read/write count
 extern RTC_HandleTypeDef hrtc;			//Handler del RTC
+extern UART_HandleTypeDef huart2;
 
 fileState verifyAccessRegister(char *name){
 	/*Esta funcion es un wrapper nada mas*/
@@ -98,7 +102,7 @@ char *searchUserOnDatabase(char *userSequence, char *databaseName){
 	return USER_ERROR;	/*No existe el usuario*/
 }
 
-char *getTimeFromRTC(void){
+char *get_time_from_rtc(char *rtc_lecture){
 	/***Esta funcion devuelve en formato string la fecha y hora actual usando el RTC***/
 	RTC_TimeTypeDef currentTime;
 	RTC_DateTypeDef currentDate;
@@ -116,6 +120,13 @@ char *getTimeFromRTC(void){
 	return date;							/*Liberar memoria luego de usar la fecha y hora*/
 }
 
+void write_on_file(char *filename, char *content){
+	Mount_SD("/");
+	Update_File(filename, content);
+	Unmount_SD("/");
+	return;
+}
+
 void recordOnRegister(char *regName, char *userName, char *accessSequence){
 	char regEntry[100];
 	char *dateAndTime;
@@ -124,15 +135,17 @@ void recordOnRegister(char *regName, char *userName, char *accessSequence){
 	/*Armo la entrada del registro*/
 	snprintf(regEntry, 100, "%s %s %s\n", dateAndTime, userName, accessSequence);
 	/*Escribo en la tarjeta SD*/
-	Mount_SD("/");
-	Update_File(regName, regEntry);
-	Unmount_SD("/");
+	write_on_file(regName, regEntry);
 	/*Libero memoria utilizada*/
 	vPortFree(dateAndTime);
 	vPortFree(userName);								//Libero memoria del puntero buf creado
 														//en la funcion que busca usuario
 	return;
 }
+
+
+
+
 
 
 

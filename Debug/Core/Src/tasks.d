@@ -19,6 +19,9 @@ Core/Src/tasks.o: ../Core/Src/tasks.c ../Core/Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_adc.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h \
@@ -65,7 +68,8 @@ Core/Src/tasks.o: ../Core/Src/tasks.c ../Core/Inc/main.h \
  C:/Users/Juli-Leo/Documents/Facultad/stm32\ workspace/EDIII_Control_Acceso/Core/Inc/Device_Drivers_inc/sd.h \
  C:/Users/Juli-Leo/Documents/Facultad/stm32\ workspace/EDIII_Control_Acceso/Core/Inc/Device_Drivers_inc/File_Handling_RTOS.h \
  C:/Users/Juli-Leo/Documents/Facultad/stm32\ workspace/EDIII_Control_Acceso/Core/Inc/Device_Drivers_inc/fatfs_sd.h \
- C:/Users/Juli-Leo/Documents/Facultad/stm32\ workspace/EDIII_Control_Acceso/Core/Inc/Device_Drivers_inc/lock.h
+ C:/Users/Juli-Leo/Documents/Facultad/stm32\ workspace/EDIII_Control_Acceso/Core/Inc/Device_Drivers_inc/lock.h \
+ ../Core/Inc/Device_Drivers_inc/adc_functions.h ../Core/Inc/arm_math.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -87,6 +91,9 @@ Core/Src/tasks.o: ../Core/Src/tasks.c ../Core/Inc/main.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_adc.h:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h:
@@ -137,3 +144,5 @@ C:/Users/Juli-Leo/Documents/Facultad/stm32\ workspace/EDIII_Control_Acceso/Core/
 C:/Users/Juli-Leo/Documents/Facultad/stm32\ workspace/EDIII_Control_Acceso/Core/Inc/Device_Drivers_inc/File_Handling_RTOS.h:
 C:/Users/Juli-Leo/Documents/Facultad/stm32\ workspace/EDIII_Control_Acceso/Core/Inc/Device_Drivers_inc/fatfs_sd.h:
 C:/Users/Juli-Leo/Documents/Facultad/stm32\ workspace/EDIII_Control_Acceso/Core/Inc/Device_Drivers_inc/lock.h:
+../Core/Inc/Device_Drivers_inc/adc_functions.h:
+../Core/Inc/arm_math.h:

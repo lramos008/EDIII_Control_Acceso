@@ -2,6 +2,7 @@
 #include "cmsis_os.h"
 #include "fatfs.h"
 #include "tasks.h"
+#include "Device_Drivers_inc/adc_functions.h"
 
 FSM StateMachine;
 extern QueueHandle_t uiQueue;
@@ -9,8 +10,27 @@ extern QueueHandle_t sequenceQueue;
 extern QueueHandle_t lockQueue;
 
 void VoiceProcessing(void *pvParameters){
+	uint16_t *buffer = pvPortMalloc(512 * sizeof(uint16_t));
+	while(1){
+		captureVoice(buffer, 512);
 
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 void KeypadScanning (void *pvParameters){
 	eventoDisplay eventoEnviado;

@@ -1,0 +1,6 @@
+../Core/Src/Device_Drivers_src/adc_functions.c:35:6:captureVoice	1
+../Core/Src/Device_Drivers_src/adc_functions.c:40:13:apply_fir_filter	2
+../Core/Src/Device_Drivers_src/adc_functions.c:53:13:apply_hamming_window	2
+../Core/Src/Device_Drivers_src/adc_functions.c:60:6:normalize_array	2
+../Core/Src/Device_Drivers_src/adc_functions.c:76:13:get_fft_mag	2
+../Core/Src/Device_Drivers_src/adc_functions.c:92:6:process_voice	1
