@@ -1,0 +1,12 @@
+../Core/drivers/sd_card/sd_functions.c:26:6:send_uart	1
+../Core/drivers/sd_card/sd_functions.c:31:6:mount_sd	2
+../Core/drivers/sd_card/sd_functions.c:40:6:unmount_sd	2
+../Core/drivers/sd_card/sd_functions.c:48:6:check_if_file_exists	2
+../Core/drivers/sd_card/sd_functions.c:57:9:write_file	5
+../Core/drivers/sd_card/sd_functions.c:85:9:append_to_file	5
+../Core/drivers/sd_card/sd_functions.c:115:9:read_file	5
+../Core/drivers/sd_card/sd_functions.c:142:9:create_file	4
+../Core/drivers/sd_card/sd_functions.c:164:9:open_file	3
+../Core/drivers/sd_card/sd_functions.c:180:9:close_file	2
+../Core/drivers/sd_card/sd_functions.c:190:7:get_line_from_file	1
+../Core/drivers/sd_card/sd_functions.c:194:6:get_time_from_rtc	1

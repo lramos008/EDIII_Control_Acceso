@@ -32,10 +32,10 @@ typedef enum{
 /*================[Private variables]=====================*/
 row_t keypad_rows[ROW_LENGTH] = {ROW_1, ROW_2, ROW_3, ROW_4};
 col_t keypad_cols[COL_LENGTH] = {COL_1, COL_2, COL_3, COL_4};
-char keypad_chars[ROWS][COLS] = { {'1', '2', '3', 'A'},
-	      	  	  	  	  		  {'4', '5', '6', 'B'},
-								  {'7', '8', '9', 'C'},
-								  {'*', '0', '#', 'D'} };
+char keypad_chars[ROW_LENGTH][COL_LENGTH] = { {'1', '2', '3', 'A'},
+	      	  	  	  	  		  	  	  	  {'4', '5', '6', 'B'},
+											  {'7', '8', '9', 'C'},
+											  {'*', '0', '#', 'D'} };
 
 /*================[Private functions]====================*/
 static void set_row(row_t row){
@@ -51,7 +51,7 @@ static void reset_row(row_t row){
 static col_state read_col(col_t col){
 	col_state state;
 	if(HAL_GPIO_ReadPin(GPIO_COL, col) == GPIO_PIN_SET){
-		vTaskDelay( DEBOUNCE_DELAY/portTICK_RATE_MS);
+		vTaskDelay( 20 /portTICK_RATE_MS);
 		if(HAL_GPIO_ReadPin(GPIO_COL, col) == GPIO_PIN_SET){
 			state = ACTIVE_COL;
 		}
@@ -71,9 +71,10 @@ uint8_t read_keypad(void){
 	for(uint8_t i = 0; i < ROW_LENGTH; i++){
 		set_row(keypad_rows[i]);
 		for(uint8_t j = 0; j < COL_LENGTH; j++){
-			if(read_col(keypad_cols[i]) == ACTIVE_COL){
+			if(read_col(keypad_cols[j]) == ACTIVE_COL){
 				key_pressed = (uint8_t) keypad_chars[i][j];
 				reset_row(keypad_rows[i]);
+				vTaskDelay( 100 /portTICK_RATE_MS);
 				return key_pressed;
 			}
 		}

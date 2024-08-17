@@ -1,6 +1,0 @@
-../Core/Src/Device_Drivers_src/screen.c:4:6:displayInit	8	static
-../Core/Src/Device_Drivers_src/screen.c:10:6:displayInsertKeyMsg	24	static
-../Core/Src/Device_Drivers_src/screen.c:24:6:displayTimeoutMsg	24	static
-../Core/Src/Device_Drivers_src/screen.c:33:6:displayIncompleteMsg	24	static
-../Core/Src/Device_Drivers_src/screen.c:51:6:displayAccessState	24	static
-../Core/Src/Device_Drivers_src/screen.c:63:6:displayNonExistentUserMsg	24	static

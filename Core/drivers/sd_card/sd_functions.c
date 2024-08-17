@@ -1,7 +1,10 @@
+#include "main.h"
 #include "fatfs.h"
+#include "ff.h"
 #include "string.h"
 #include "stdio.h"
 #include "fatfs_sd.h"
+#include <stdbool.h>
 
 #define UART &huart2
 
@@ -20,7 +23,7 @@ extern UART_HandleTypeDef huart2;
 extern RTC_HandleTypeDef hrtc;			//Handler del RTC
 
 
-static void send_uart(char *string){
+void send_uart(char *string){
 	HAL_UART_Transmit(UART, (uint8_t *)string, strlen (string), HAL_MAX_DELAY);
 	return;
 }
@@ -40,6 +43,15 @@ void unmount_sd(const char* path){
 		send_uart("Error al desmontar la tarjeta SD!!!\n\n");
 		while(1);
 	}
+}
+
+bool check_if_file_exists(char *name){
+	bool file_exist = false;
+	fresult = f_stat(name, &fno);
+	if(fresult == FR_OK){
+		file_exist = true;
+	}
+	return file_exist;
 }
 
 FRESULT write_file(char *name, char *data){
@@ -121,7 +133,29 @@ FRESULT read_file(char *name, char *buffer){
 	/* Close file */
 	fresult = f_close(&fil);
 	if(fresult != FR_OK){
-		send_uart("Error!!! No se pudo leer el archivo.\n\n");
+		send_uart("Error!!! No se pudo cerrar el archivo.\n\n");
+		while(1);
+	}
+	return fresult;
+}
+
+FRESULT create_file(char *name){
+	/*Chequeo existencia del archivo*/
+	fresult = f_stat (name, &fno);
+	if(fresult != FR_OK){
+		send_uart("Error!!! El archivo no existe.\n\n");
+		while(1);
+	}
+	/*Abro el archivo y lo creo*/
+	fresult = f_open(&fil, name, FA_CREATE_ALWAYS|FA_READ|FA_WRITE);
+	if(fresult != FR_OK){
+		send_uart("Error!!! No se pudo crear el archivo.\n\n");
+		while(1);
+	}
+	/*Cierro el archivo*/
+	fresult = f_close(&fil);
+	if(fresult != FR_OK){
+		send_uart("Error!!! No se pudo cerrar el archivo.\n\n");
 		while(1);
 	}
 	return fresult;
@@ -153,43 +187,26 @@ FRESULT close_file(char *name){
 	return fresult;
 }
 
-void get_line_from_file(char *buffer, int buffer_length){
-	f_gets(buffer, buffer_length, &fil);
+char *get_line_from_file(char *buffer, int buffer_length){
+	return f_gets(buffer, buffer_length, &fil);
+}
+
+void get_time_from_rtc(char *rtc_lecture){
+	/***Esta funcion devuelve en formato string la fecha y hora actual usando el RTC***/
+	RTC_TimeTypeDef currentTime;
+	RTC_DateTypeDef currentDate;
+	char *time = pvPortMalloc(15 * sizeof(char));
+	/*Obtengo el tiempo actual*/
+	HAL_RTC_GetTime(&hrtc, &currentTime, RTC_FORMAT_BIN);
+	/*Obtengo la fecha actual*/
+	HAL_RTC_GetDate(&hrtc, &currentDate, RTC_FORMAT_BIN);
+	/*Guardo fecha y hora en los buffers correspondientes*/
+	snprintf(time, 15, "%02d:%02d:%02d", currentTime.Hours, currentTime.Minutes, currentTime.Seconds);
+	snprintf(rtc_lecture, 15, "%02d-%02d-%2d ", currentDate.Date, currentDate.Month, 2000 + currentDate.Year);
+	strcat(rtc_lecture, time);
+	vPortFree(time);
 	return;
 }
 
-
-char *searchUserOnDatabase(char *userSequence, char *databaseName){
-	/***Esta funcion busca en una base de datos .txt al usuario asociado a la secuencia ingresada.***/
-	/***Si lo encuentra, devuelve puntero al usuario (str). Si no, devuelve USER_ERROR.***/
-	/***Se devuelve FILE_ERROR si no se puede abrir el archivo correctamente.***/
-	/*Reservo espacio en memoria*/
-	char *buf = pvPortMalloc(100*sizeof(char));
-	char *userName;
-	char *currentUserKey;
-	Mount_SD("/");
-	fresult = f_open(&fil, databaseName, FA_READ);
-	if (fresult != FR_OK){
-		/*Esto se implementa con fines de debugging*/
-		sprintf (buf, "Error al abrir archivo *%s*\n\n", databaseName);
-		Send_Uart(buf);
-		vPortFree(buf);
-		return FILE_ERROR;
-	}
-	/*Comienza la busqueda del usuario*/
-	f_gets(buf, 100, &fil);												//Descarto header del archivo
-	while(f_gets(buf, 100, &fil)){										//Avanza linea a linea del archivo hasta el final
-		userName = strtok(buf, " ");									//Usando este delimitador consigo primero el usuario
-		currentUserKey = strtok(NULL, ",");								//Luego consigo la clave, que viene despues del espacio
-		if(currentUserKey != NULL && strcmp(currentUserKey, userSequence) == 0){
-			Unmount_SD("/");
-			return userName;											/*Recordar liberar memoria de userName en la tarea*/
-		}
-	}
-	/*Libero memoria y desmonto tarjeta SD*/
-	vPortFree(buf);
-	Unmount_SD("/");
-	return USER_ERROR;	/*No existe el usuario*/
-}
 
 

@@ -22,9 +22,14 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
-Core/Src/Device_Drivers_src \
 Core/Src \
 Core/Startup \
+Core/drivers/display \
+Core/drivers/keypad \
+Core/drivers/sd_card \
+Core/subsystems/display_manager \
+Core/subsystems/input_sequence_scan \
+Core/subsystems/user_check_task \
 Drivers/STM32F4xx_HAL_Driver/Src \
 FATFS/App \
 FATFS/Target \

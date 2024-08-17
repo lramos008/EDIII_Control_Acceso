@@ -19,12 +19,14 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "cmsis_os.h"
-#include "fatfs.h"
-#define ARM_MATH_CM4
-#include "arm_math.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "tasks.h"
+#define ARM_MATH_CM4
+#include "arm_math.h"
+#include "display_functions.h"
+#include "display_manager.h"
+#include "input_sequence_scan.h"
+#include "user_check_task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -54,11 +56,12 @@ SPI_HandleTypeDef hspi3;
 
 UART_HandleTypeDef huart2;
 
-osThreadId defaultTaskHandle;
 /* USER CODE BEGIN PV */
-QueueHandle_t uiQueue;
-QueueHandle_t sequenceQueue;
-QueueHandle_t lockQueue;
+//QueueHandle_t uiQueue;
+//QueueHandle_t sequenceQueue;
+//QueueHandle_t lockQueue;
+QueueHandle_t sequence_queue;
+QueueHandle_t display_queue;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -72,7 +75,7 @@ static void MX_RTC_Init(void);
 static void MX_ADC1_Init(void);
 
 /* USER CODE BEGIN PFP */
-
+void idle_task(void *pvParameters);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -133,21 +136,23 @@ int main(void)
   /* USER CODE END RTOS_TIMERS */
 
   /* USER CODE BEGIN RTOS_QUEUES */
-  uiQueue = xQueueCreate(1, sizeof(eventoDisplay));
-  sequenceQueue = xQueueCreate(6, sizeof(char));
-  lockQueue = xQueueCreate(1, sizeof(lockState));
+  display_queue = xQueueCreate(1, sizeof(display_state_t));
+  sequence_queue = xQueueCreate(6, sizeof(char));
+//  uiQueue = xQueueCreate(1, sizeof(eventoDisplay));
+//  sequenceQueue = xQueueCreate(6, sizeof(char));
+//  lockQueue = xQueueCreate(1, sizeof(lockState));
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
   /* definition and creation of defaultTask */
 
   /* USER CODE BEGIN RTOS_THREADS */
-  //xTaskCreate(ScreenManager, "Tarea 05", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 4, NULL);
+  xTaskCreate(display_manager, "Tarea 05", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 4, NULL);
   //xTaskCreate(LockControl, "Tarea 04", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 3, NULL);
-  xTaskCreate(VoiceProcessing, "Tarea 03", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 2, NULL);
-  //xTaskCreate(sdHandler, "Tarea 02", 8 * configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 2, NULL);
-  //xTaskCreate(KeypadScanning, "Tarea 01", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL);
-  xTaskCreate(IdleTask, "Tarea Idle", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL);
+  //xTaskCreate(VoiceProcessing, "Tarea 03", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 2, NULL);
+  xTaskCreate(user_check_task, "Tarea 02", 10 * configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 2, NULL);
+  xTaskCreate(input_sequence_scan, "Tarea 01", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL);
+  xTaskCreate(idle_task, "Tarea Idle", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL);
   /* USER CODE END RTOS_THREADS */
 
   /* Start scheduler */
@@ -516,7 +521,9 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void idle_task(void *pvParameters){
+	while(1);
+}
 /* USER CODE END 4 */
 
 /* USER CODE BEGIN Header_StartDefaultTask */

@@ -1,0 +1,9 @@
+../Core/subsystems/display_manager/display_manager.c:20:13:display_init	8	static
+../Core/subsystems/display_manager/display_manager.c:26:13:display_sequence_entry	24	static
+../Core/subsystems/display_manager/display_manager.c:52:13:display_insert_key_msg	24	static
+../Core/subsystems/display_manager/display_manager.c:66:13:display_timeout_msg	24	static
+../Core/subsystems/display_manager/display_manager.c:77:13:display_incomplete_msg	24	static
+../Core/subsystems/display_manager/display_manager.c:97:13:display_access_granted	24	static
+../Core/subsystems/display_manager/display_manager.c:110:13:display_no_user_found	24	static
+../Core/subsystems/display_manager/display_manager.c:131:24:receive_screen	16	static
+../Core/subsystems/display_manager/display_manager.c:138:6:display_manager	24	static

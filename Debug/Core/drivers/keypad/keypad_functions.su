@@ -1,0 +1,4 @@
+../Core/drivers/keypad/keypad_functions.c:41:13:set_row	16	static
+../Core/drivers/keypad/keypad_functions.c:46:13:reset_row	16	static
+../Core/drivers/keypad/keypad_functions.c:51:18:read_col	24	static
+../Core/drivers/keypad/keypad_functions.c:69:9:read_keypad	16	static

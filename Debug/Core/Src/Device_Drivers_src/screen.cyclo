@@ -1,6 +1,0 @@
-../Core/Src/Device_Drivers_src/screen.c:4:6:displayInit	1
-../Core/Src/Device_Drivers_src/screen.c:10:6:displayInsertKeyMsg	1
-../Core/Src/Device_Drivers_src/screen.c:24:6:displayTimeoutMsg	1
-../Core/Src/Device_Drivers_src/screen.c:33:6:displayIncompleteMsg	1
-../Core/Src/Device_Drivers_src/screen.c:51:6:displayAccessState	1
-../Core/Src/Device_Drivers_src/screen.c:63:6:displayNonExistentUserMsg	1

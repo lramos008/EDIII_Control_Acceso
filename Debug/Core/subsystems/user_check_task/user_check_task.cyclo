@@ -1,0 +1,5 @@
+../Core/subsystems/user_check_task/user_check_task.c:15:13:check_if_database_exists	2
+../Core/subsystems/user_check_task/user_check_task.c:27:13:check_if_register_exists	2
+../Core/subsystems/user_check_task/user_check_task.c:38:13:check_if_user_exists_on_database	4
+../Core/subsystems/user_check_task/user_check_task.c:56:13:receive_sequence	2
+../Core/subsystems/user_check_task/user_check_task.c:63:6:user_check_task	2

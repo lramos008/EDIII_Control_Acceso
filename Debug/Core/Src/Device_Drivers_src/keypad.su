@@ -1,5 +1,0 @@
-../Core/Src/Device_Drivers_src/keypad.c:3:15:HandleInput	24	static
-../Core/Src/Device_Drivers_src/keypad.c:44:9:GetKey	56	static
-../Core/Src/Device_Drivers_src/keypad.c:75:9:AreVectorsEqual	32	static
-../Core/Src/Device_Drivers_src/keypad.c:87:6:ClearString	16	static
-../Core/Src/Device_Drivers_src/keypad.c:96:6:ClearBuffer	24	static

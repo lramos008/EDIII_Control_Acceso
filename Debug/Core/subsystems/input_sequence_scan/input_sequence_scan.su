@@ -1,0 +1,4 @@
+../Core/subsystems/input_sequence_scan/input_sequence_scan.c:30:13:clear_buffer	24	static
+../Core/subsystems/input_sequence_scan/input_sequence_scan.c:38:13:send_sequence	24	static
+../Core/subsystems/input_sequence_scan/input_sequence_scan.c:45:24:handle_keypad_input	24	static
+../Core/subsystems/input_sequence_scan/input_sequence_scan.c:137:6:input_sequence_scan	24	static

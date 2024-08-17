@@ -1,0 +1,14 @@
+../Core/drivers/display/ssd1306_tests.c:116:6:ssd1306_TestBorder	9
+../Core/drivers/display/ssd1306_tests.c:142:6:ssd1306_TestFonts1	1
+../Core/drivers/display/ssd1306_tests.c:175:6:ssd1306_TestFonts2	1
+../Core/drivers/display/ssd1306_tests.c:200:6:ssd1306_TestFonts3	1
+../Core/drivers/display/ssd1306_tests.c:220:6:ssd1306_TestFPS	2
+../Core/drivers/display/ssd1306_tests.c:257:6:ssd1306_TestLine	1
+../Core/drivers/display/ssd1306_tests.c:265:6:ssd1306_TestRectangle	2
+../Core/drivers/display/ssd1306_tests.c:275:6:ssd1306_TestRectangleFill	1
+../Core/drivers/display/ssd1306_tests.c:283:6:ssd1306_TestRectangleInvert	1
+../Core/drivers/display/ssd1306_tests.c:307:6:ssd1306_TestCircle	3
+../Core/drivers/display/ssd1306_tests.c:322:6:ssd1306_TestArc	1
+../Core/drivers/display/ssd1306_tests.c:329:6:ssd1306_TestPolyline	1
+../Core/drivers/display/ssd1306_tests.c:346:6:ssd1306_TestDrawBitmap	1
+../Core/drivers/display/ssd1306_tests.c:359:6:ssd1306_TestAll	1

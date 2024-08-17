@@ -1,6 +1,0 @@
-../Core/Src/Device_Drivers_src/adc_functions.c:35:6:captureVoice	16	static
-../Core/Src/Device_Drivers_src/adc_functions.c:40:13:apply_fir_filter	8416	static
-../Core/Src/Device_Drivers_src/adc_functions.c:53:13:apply_hamming_window	32	static
-../Core/Src/Device_Drivers_src/adc_functions.c:60:6:normalize_array	40	static
-../Core/Src/Device_Drivers_src/adc_functions.c:76:13:get_fft_mag	8208	static
-../Core/Src/Device_Drivers_src/adc_functions.c:92:6:process_voice	8208	static
