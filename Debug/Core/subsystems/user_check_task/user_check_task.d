@@ -56,7 +56,8 @@ Core/subsystems/user_check_task/user_check_task.o: \
  C:/Users/Juli-Leo/Documents/Facultad/Proyecto_digitales_3/EDIII_Control_Acceso/Core/drivers/sd_card/sd_functions.h \
  ../Middlewares/Third_Party/FatFs/src/ff.h \
  ../Middlewares/Third_Party/FatFs/src/integer.h ../FATFS/Target/ffconf.h \
- C:/Users/Juli-Leo/Documents/Facultad/Proyecto_digitales_3/EDIII_Control_Acceso/Core/drivers/display/display_functions.h
+ C:/Users/Juli-Leo/Documents/Facultad/Proyecto_digitales_3/EDIII_Control_Acceso/Core/drivers/display/display_functions.h \
+ ../Core/Inc/arm_math.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -116,3 +117,4 @@ C:/Users/Juli-Leo/Documents/Facultad/Proyecto_digitales_3/EDIII_Control_Acceso/C
 ../Middlewares/Third_Party/FatFs/src/integer.h:
 ../FATFS/Target/ffconf.h:
 C:/Users/Juli-Leo/Documents/Facultad/Proyecto_digitales_3/EDIII_Control_Acceso/Core/drivers/display/display_functions.h:
+../Core/Inc/arm_math.h:

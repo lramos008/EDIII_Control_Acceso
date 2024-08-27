@@ -126,8 +126,6 @@ static void display_no_user_found(void){
 	display_sequence_entry(REINICIAR_ENTRADA);
 }
 
-
-
 static display_state_t receive_screen(void){
 	display_state_t received_screen;
 	xQueueReceive(display_queue, &received_screen, portMAX_DELAY);

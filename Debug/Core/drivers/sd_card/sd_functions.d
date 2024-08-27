@@ -58,7 +58,8 @@ Core/drivers/sd_card/sd_functions.o: \
  ../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
  ../Middlewares/Third_Party/FatFs/src/diskio.h \
  ../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/user_diskio.h \
- ../Core/drivers/sd_card/fatfs_sd.h
+ ../Core/drivers/sd_card/fatfs_sd.h ../Core/Inc/arm_math.h \
+ ../Core/drivers/sd_card/sd_functions.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -122,3 +123,5 @@ Core/drivers/sd_card/sd_functions.o: \
 ../Middlewares/Third_Party/FatFs/src/ff.h:
 ../FATFS/Target/user_diskio.h:
 ../Core/drivers/sd_card/fatfs_sd.h:
+../Core/Inc/arm_math.h:
+../Core/drivers/sd_card/sd_functions.h:

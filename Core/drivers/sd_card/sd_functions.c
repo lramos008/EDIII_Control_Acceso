@@ -2,10 +2,13 @@
 #include "fatfs.h"
 #include "ff.h"
 #include "string.h"
+#include <stdlib.h>
 #include "stdio.h"
 #include "fatfs_sd.h"
 #include <stdbool.h>
-
+#define ARM_MATH_CM4
+#include "arm_math.h"
+#include "sd_functions.h"
 #define UART &huart2
 
 FATFS fs;  // file system
@@ -21,7 +24,6 @@ uint32_t total, free_space;
 
 extern UART_HandleTypeDef huart2;
 extern RTC_HandleTypeDef hrtc;			//Handler del RTC
-
 
 void send_uart(char *string){
 	HAL_UART_Transmit(UART, (uint8_t *)string, strlen (string), HAL_MAX_DELAY);
@@ -140,12 +142,6 @@ FRESULT read_file(char *name, char *buffer){
 }
 
 FRESULT create_file(char *name){
-	/*Chequeo existencia del archivo*/
-	fresult = f_stat (name, &fno);
-	if(fresult != FR_OK){
-		send_uart("Error!!! El archivo no existe.\n\n");
-		while(1);
-	}
 	/*Abro el archivo y lo creo*/
 	fresult = f_open(&fil, name, FA_CREATE_ALWAYS|FA_READ|FA_WRITE);
 	if(fresult != FR_OK){
@@ -189,6 +185,70 @@ FRESULT close_file(char *name){
 
 char *get_line_from_file(char *buffer, int buffer_length){
 	return f_gets(buffer, buffer_length, &fil);
+}
+
+void write_chunk(char *filename, void *buffer, size_t data_type_size, size_t chunk_size){
+	/*Defino punteros obtenidos del casteo de buffer*/
+	float32_t *f_buffer = (float32_t *)buffer;
+	uint16_t *ui_buffer = (uint16_t *) buffer;
+	char str[10];
+	/*Abro el archivo*/
+	fresult = f_stat(filename, &fno);
+	fresult = f_open(&fil, filename, FA_OPEN_APPEND | FA_WRITE);
+	for(size_t i = 0; i < chunk_size; i++){
+		if(data_type_size == sizeof(float32_t)){
+			snprintf(str, 10, "%.6f\n", f_buffer[i]);
+		}
+		if(data_type_size == sizeof(uint16_t)){
+			snprintf(str, 10, "%u\n", ui_buffer[i]);
+		}
+		fresult = f_write(&fil, str, strlen(str), NULL);
+	}
+	fresult = f_close(&fil);
+	return;
+}
+
+uint32_t read_chunk(char *filename, uint32_t current_pos, void *buffer, size_t data_type_size, size_t chunk_size){
+	/*Defino variable para guardar la posicion de la proxima lectura en bloque*/
+	uint32_t next_pos;
+	/*Defino punteros obtenidos del casteo de buffer*/
+	float32_t *f_buffer = (float32_t *)buffer;
+	uint16_t *ui_buffer = (uint16_t *) buffer;
+	/*Defino string donde se guardaran las lineas del archivo*/
+	char str[10];
+	/*Abro el archivo*/
+	fresult = f_stat(filename, &fno);
+	fresult = f_open(&fil, filename, FA_READ);
+	/*Seteo la posición en el archivo*/
+	f_lseek(&fil, current_pos);
+	next_pos = f_tell(&fil);
+	/*Leo linea por linea y convierto al tipo de numero que corresponda. Luego guardo en el buffer*/
+	for(size_t i = 0; i < chunk_size; i++){
+		if(get_line_from_file(str, 10) != 0){
+			/*Chequea tipo de variable que debe leer desde el archivo*/
+			if(data_type_size == sizeof(float32_t)){
+				/*Guardo numero leido desde SD en buffer*/
+				f_buffer[i] = (float32_t)strtof(str, NULL);
+			}
+			if(data_type_size == sizeof(uint16_t)){
+				ui_buffer[i] = strtoul(str, NULL, 10);
+			}
+			next_pos = f_tell(&fil);
+		}
+		else{
+			/*Si se llega al final del archivo, se lo cierra y se reinicia la posicion*/
+			next_pos = 0;
+			break;
+		}
+	}
+	/*Si se copio el bloque y no se llego al final del archivo*/
+	/*Cierro el archivo y devuelvo la ultima posicion en el archivo*/
+	fresult = f_close(&fil);
+	return next_pos;
+}
+
+FRESULT remove_file(char *filename){
+	return f_unlink(filename);
 }
 
 void get_time_from_rtc(char *rtc_lecture){

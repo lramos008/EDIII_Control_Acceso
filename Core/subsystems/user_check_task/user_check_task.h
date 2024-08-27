@@ -5,4 +5,5 @@
 
 /*===============[Public functions]=====================*/
 void user_check_task(void *pvParameters);
+void test_task(void *pvParameters);
 #endif // USER_CHECK_TASK_H
